@@ -1,4 +1,4 @@
-import { IsIn, IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsIn, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
 
 export class CreatePostDto {
 
@@ -10,6 +10,7 @@ export class CreatePostDto {
     content: string;
 
     @IsNumber()
+    @IsOptional()
     author_id: number
 
 }

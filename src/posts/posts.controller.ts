@@ -12,8 +12,9 @@ export class PostsController {
 
   @Post()
   @UseGuards(AuthGuard)
-  create(@Body() createPostDto: CreatePostDto) {
-    return this.postsService.create(createPostDto);
+  @Roles('admin', 'visitor', 'superadmin')
+  create(@Body() createPostDto: CreatePostDto, @Request() req) {
+    return this.postsService.create(createPostDto, req);
   }
 
   @Get()
@@ -24,18 +25,21 @@ export class PostsController {
   }
 
   @Get(':id')
+  @Roles('admin', 'visitor', 'superadmin')
   @UseGuards(AuthGuard)
   findOne(@Param('id') id: string) {
     return this.postsService.findOne(parseInt(id));
   }
 
   @Patch(':id')
+  @Roles('admin', 'visitor', 'superadmin')
   @UseGuards(AuthGuard)
   update(@Param('id') id: string, @Body() updatePostDto: UpdatePostDto) {
     return this.postsService.update(parseInt(id), updatePostDto);
   }
 
   @Delete(':id')
+  @Roles('admin', 'visitor', 'superadmin')
   @UseGuards(AuthGuard)
   remove(@Param('id') id: string) {
     return this.postsService.remove(parseInt(id));

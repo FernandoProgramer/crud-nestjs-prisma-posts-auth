@@ -24,7 +24,11 @@ export class PostsService {
    * @returns El post creado.
    * @throws InternalServerErrorException - Si ocurre un error durante la creación.
    */
-  async create(data: CreatePostDto) {
+  async create(data: CreatePostDto, req) {
+
+    // Tomar id del creado automaticamente
+    data = { ...data, author_id: req.user?.userInfo?.id };
+    console.log(data)
 
     try {
       return await this.prisma.posts.create({
