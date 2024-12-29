@@ -28,7 +28,6 @@ export class PostsService {
 
     // Tomar id del creado automaticamente
     data = { ...data, author_id: req.user?.userInfo?.id };
-    console.log(data)
 
     try {
       return await this.prisma.posts.create({
